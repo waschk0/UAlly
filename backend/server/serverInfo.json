@@ -1,0 +1,10 @@
+{
+  "smtp": {
+    "host": "smtp-mail.outlook.com",
+    "port": 587,
+    "auth": {
+      "user": "a79890@ualg.pt",
+      "pass": "wigst123"
+    }
+  }
+}
