@@ -99,10 +99,10 @@ export class Worker {
 
         let query = `SELECT *
                      FROM users
-                     WHERE users.email = "${email}"
-                       and users.password = "${encryptPass}"`
+                     WHERE users.email = ?
+                       and users.password = ?`
         return new Promise((inResolve, inReject) => {
-            db.get(query, function (err: Error | null, row: IUser) {
+            db.get(query, [email, encryptPass], function (err: Error | null, row: IUser) {
                 if (err) inReject(err)
                 else {
                     inResolve(row)
@@ -137,9 +137,9 @@ export class Worker {
     public getUserById(id: string): Promise<IUser> {
         let query = `SELECT *
                      FROM users
-                     WHERE users.id = "${id}"`
+                     WHERE users.id = ?`
         return new Promise((inResolve, inReject) => {
-            db.get(query, function (err: Error, row: IUser) {
+            db.get(query, [id], function (err: Error, row: IUser) {
                 if (err) inReject(err);
                 else {
                     inResolve(row)
@@ -155,9 +155,9 @@ export class Worker {
     public getUserByName(name: string): Promise<IUser[]> {
         let query = `SELECT *
                      FROM users
-                     WHERE users.name = "${name}"`
+                     WHERE users.name = ?`
         return new Promise((inResolve, inReject) => {
-            db.all(query, function (err: Error, result: IUser[]) {
+            db.all(query, [name], function (err: Error, result: IUser[]) {
                 if (err) inReject(err);
                 else {
                     inResolve(result)
@@ -173,9 +173,9 @@ export class Worker {
     public getUserByEmail(email: string): Promise<IUser> {
         let query = `SELECT *
                      FROM users
-                     WHERE users.email = "${email}"`
+                     WHERE users.email = ?`
         return new Promise((inResolve, inReject) => {
-            db.get(query, function (err: Error, result: IUser) {
+            db.get(query, [email], function (err: Error, result: IUser) {
                 if (err) inReject(err);
                 else {
                     inResolve(result)
